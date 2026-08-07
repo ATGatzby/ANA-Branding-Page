@@ -82,17 +82,19 @@ textarea:focus-visible {
 /* === Design Tokens === */
 
 :root {
-  /* Color palette — "Clinical Trust" */
+  /* Color palette — "Clinical Trust", warmed slightly toward the editorial,
+     less-clinical-feeling neutrals of the reference (noblehandkraft.com)
+     while keeping our own navy/teal/coral identity rather than its gold. */
   --color-navy: #0B2A4A;
   --color-navy-light: #14406B;
-  --color-bg: #F7F9FB;
+  --color-bg: #F8F6F2;
   --color-surface: #FFFFFF;
   --color-text: #16232E;
   --color-muted: #5B6B7A;
   --color-accent: #2E86AB;
   --color-donate: #E5533C;
   --color-donate-dark: #C43F2B;
-  --color-border: #E1E7EC;
+  --color-border: #E7E2D9;
 
   /* Shape */
   --radius: 12px;
@@ -105,8 +107,13 @@ textarea:focus-visible {
   --space-5: 3rem;
   --space-6: 5rem;
 
-  /* Typography */
-  --font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  /* Typography -- serif display paired with a clean grotesque body,
+     matching the reference site's editorial pairing (Playfair Display +
+     Inter) rather than a single system-font stack. */
+  --font-heading: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-body: 'Inter', -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --ls-heading: -0.02em;
+  --ls-label: 0.18em;
 
   /* Responsive type scale */
   --h1-size: clamp(2rem, 1.5rem + 2.2vw, 3.5rem);
@@ -118,17 +125,20 @@ textarea:focus-visible {
 }
 
 body {
-  font-family: var(--font-family);
+  font-family: var(--font-body);
   color: var(--color-text);
   background-color: var(--color-bg);
-  line-height: 1.55;
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
 }
 
 h1, h2, h3, h4 {
+  font-family: var(--font-heading);
   color: var(--color-navy);
-  line-height: 1.15;
+  line-height: 1.2;
   font-weight: 700;
+  letter-spacing: var(--ls-heading);
+  text-wrap: balance;
 }
 
 h1 {
@@ -145,6 +155,27 @@ h3 {
 
 p {
   color: var(--color-text);
+}
+
+/* Section eyebrow label + thin accent divider -- an editorial pairing used
+   ahead of each major section heading for a consistent, refined rhythm. */
+.section__label {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--ls-label);
+  color: var(--color-accent);
+  margin-bottom: var(--space-2);
+}
+
+.section__divider {
+  width: 60px;
+  height: 2px;
+  background-color: var(--color-accent);
+  margin-top: var(--space-2);
+  margin-bottom: var(--space-3);
 }
 
 /* === Layout Primitives (.container, .section, .grid, .btn, .card) === */
@@ -283,13 +314,21 @@ p {
   font-size: 0.875rem;
 }
 
-/* Card */
+/* Card -- .research-card and .team-card are whole clickable cards (an <a>
+   wraps the full card rather than nesting a link inside it), so the hover
+   lift here is the visual cue that the entire card is interactive. */
 .card {
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
   padding: var(--space-3);
   box-shadow: var(--shadow-sm);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
 }
 
 /* === Header / Nav === */
@@ -620,6 +659,19 @@ p {
   color: var(--color-muted);
 }
 
+/* The whole card is the link (an <a> wraps title/image/body), so this is a
+   plain span styled to look like the old "Read more" link, not a nested <a>. */
+.research-card__cta {
+  margin-top: auto;
+  padding: 0 var(--space-3) var(--space-3);
+  font-weight: 600;
+  color: var(--color-accent);
+}
+
+.research-card:hover .research-card__cta {
+  text-decoration: underline;
+}
+
 /* === Publications === */
 
 .pub-list {
@@ -734,6 +786,11 @@ p {
   font-size: 0.9rem;
 }
 
+/* .team-card is itself an <a> (whole card clickable to the profile page) */
+.team-card {
+  cursor: pointer;
+}
+
 /* === Donate === */
 
 .donate__panel {
@@ -797,6 +854,213 @@ p {
   .contact__grid {
     grid-template-columns: 1fr 1fr;
   }
+}
+
+/* === Contact Form === */
+
+.contact-form {
+  margin-top: var(--space-5);
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.contact-form h3 {
+  font-size: var(--h3-size);
+}
+
+.contact-form__row {
+  display: grid;
+  gap: var(--space-3);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 640px) {
+  .contact-form__row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.contact-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.contact-form__field label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--color-navy);
+}
+
+.contact-form__field input,
+.contact-form__field textarea {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 0.7rem 0.9rem;
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--color-text);
+  background-color: var(--color-surface);
+  resize: vertical;
+}
+
+.contact-form__field input:focus-visible,
+.contact-form__field textarea:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 1px;
+}
+
+/* Honeypot: invisible to real visitors, still present in the DOM for bots
+   that don't execute CSS -- a standard spam-filter trick for static forms. */
+.contact-form__honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.contact-form__status {
+  font-size: 0.9rem;
+  font-weight: 600;
+  min-height: 1.2em;
+}
+
+.contact-form__status[data-state="success"] {
+  color: #1a7f4e;
+}
+
+.contact-form__status[data-state="error"] {
+  color: var(--color-donate-dark);
+}
+
+.contact-form .btn {
+  align-self: flex-start;
+}
+
+/* === Detail Pages (research articles & team profiles) === */
+
+.breadcrumb {
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--color-muted);
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: var(--space-2);
+}
+
+.breadcrumb:hover {
+  color: var(--color-accent);
+}
+
+.article-hero {
+  padding-block: var(--space-5) var(--space-2);
+}
+
+.article-hero__eyebrow {
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  margin-top: var(--space-3);
+}
+
+.article-hero__image {
+  width: 100%;
+  aspect-ratio: 16 / 7;
+  object-fit: cover;
+  border-radius: var(--radius);
+  margin-top: var(--space-4);
+}
+
+.article-body {
+  max-width: 70ch;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.article-body p {
+  color: var(--color-text);
+}
+
+.article-body ul,
+.profile-body ul {
+  list-style: disc;
+  padding-left: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.article-cta {
+  margin-top: var(--space-3);
+  padding: var(--space-3);
+  border-radius: var(--radius);
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.profile-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-2);
+  padding-block: var(--space-5) var(--space-4);
+}
+
+.profile-hero__photo {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--color-surface);
+  box-shadow: var(--shadow-md);
+  margin-bottom: var(--space-1);
+}
+
+.profile-hero__role {
+  color: var(--color-muted);
+  font-size: 1.05rem;
+}
+
+.profile-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  justify-content: center;
+  margin-top: var(--space-1);
+}
+
+.profile-meta__tag {
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  padding: 0.35rem 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-navy);
+}
+
+.profile-body {
+  max-width: 65ch;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  text-align: left;
 }
 
 /* === Footer === */

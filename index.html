@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dr. Ana Vujic — Cardiometabolic Research</title>
   <meta name="description" content="Dr. Ana Vujic, Ph.D. leads a research lab investigating the link between heart disease and Type 2 diabetes. Learn about her research, publications, and support the lab's work.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -80,7 +83,9 @@
             <img src="images/Ana.jpeg" alt="Portrait of Dr. Ana Vujic, Ph.D." width="800" height="800">
           </div>
           <div class="about__body">
+            <span class="section__label">The Researcher</span>
             <h2>About Dr. Vujic</h2>
+            <div class="section__divider"></div>
             <p>
               Dr. Ana Vujic is a cardiometabolic researcher at Placeholder University School of
               Medicine, where her lab studies why cardiovascular disease and Type 2 diabetes
@@ -113,9 +118,11 @@
     <!-- ============ RESEARCH FOCUS ============ -->
     <section id="research" class="section research section--alt">
       <div class="container">
+        <span class="section__label">What We Study</span>
         <h2>Research Focus</h2>
+        <div class="section__divider"></div>
         <div class="grid grid--2">
-          <div class="research-card card">
+          <a href="research/heart-disease.html" class="research-card card">
             <img class="research-card__image" src="images/research-heart.png" alt="Medical illustration of blood flow through the heart">
             <h3 class="research-card__title">Heart Disease Research</h3>
             <p class="research-card__body">
@@ -123,9 +130,9 @@
               disease, with an emphasis on how vascular inflammation and metabolic
               dysfunction interact over time.
             </p>
-            <a href="#">Read more</a>
-          </div>
-          <div class="research-card card">
+            <span class="research-card__cta">Read more &rarr;</span>
+          </a>
+          <a href="research/diabetes.html" class="research-card card">
             <img class="research-card__image" src="images/research-diabetes.png" alt="Medical illustration of a blood glucose test">
             <h3 class="research-card__title">Diabetes Research</h3>
             <p class="research-card__body">
@@ -133,8 +140,8 @@
               identify early markers of Type 2 diabetes risk and new avenues for
               intervention.
             </p>
-            <a href="#">Read more</a>
-          </div>
+            <span class="research-card__cta">Read more &rarr;</span>
+          </a>
         </div>
       </div>
     </section>
@@ -142,7 +149,9 @@
     <!-- ============ PUBLICATIONS ============ -->
     <section id="publications" class="section publications">
       <div class="container">
+        <span class="section__label">Selected Work</span>
         <h2>Publications &amp; News</h2>
+        <div class="section__divider"></div>
         <ul class="pub-list">
           <li class="pub-item">
             <p class="pub-item__title">Shared Inflammatory Pathways in Cardiovascular Disease and Type 2 Diabetes: A Cohort Analysis</p>
@@ -167,7 +176,9 @@
     <!-- ============ MEDIA & PRESS ============ -->
     <section id="media" class="section media section--alt">
       <div class="container">
+        <span class="section__label">In The Media</span>
         <h2>Media &amp; Press</h2>
+        <div class="section__divider"></div>
         <p class="media__intro">
           Dr. Vujic is available for interviews, expert commentary, and features on
           cardiometabolic health across print, podcast, and broadcast media.
@@ -192,28 +203,30 @@
     <!-- ============ TEAM ============ -->
     <section id="team" class="section team">
       <div class="container">
+        <span class="section__label">The People</span>
         <h2>Team &amp; Collaborators</h2>
+        <div class="section__divider"></div>
         <div class="grid grid--4">
-          <div class="team-card card">
+          <a href="team/alex-kim.html" class="team-card card">
             <img class="team-card__photo" src="images/team-1.jpg" alt="Placeholder photo for Alex Kim">
             <p class="team-card__name">Alex Kim, Ph.D.</p>
             <p class="team-card__role">Postdoctoral Researcher</p>
-          </div>
-          <div class="team-card card">
+          </a>
+          <a href="team/maria-chavez.html" class="team-card card">
             <img class="team-card__photo" src="images/team-2.jpg" alt="Placeholder photo for Maria Chavez">
             <p class="team-card__name">Maria Chavez</p>
             <p class="team-card__role">Lab Manager</p>
-          </div>
-          <div class="team-card card">
+          </a>
+          <a href="team/samir-patel.html" class="team-card card">
             <img class="team-card__photo" src="images/team-3.jpg" alt="Placeholder photo for Samir Patel">
             <p class="team-card__name">Samir Patel</p>
             <p class="team-card__role">Clinical Coordinator</p>
-          </div>
-          <div class="team-card card">
+          </a>
+          <a href="team/priya-nair.html" class="team-card card">
             <img class="team-card__photo" src="images/team-4.jpg" alt="Placeholder photo for Priya Nair">
             <p class="team-card__name">Priya Nair</p>
             <p class="team-card__role">Data Scientist</p>
-          </div>
+          </a>
         </div>
       </div>
     </section>
@@ -243,7 +256,9 @@
     <!-- ============ CONTACT ============ -->
     <section id="contact" class="section contact section--alt">
       <div class="container">
+        <span class="section__label">Get In Touch</span>
         <h2>Contact</h2>
+        <div class="section__divider"></div>
         <div class="contact__grid grid grid--2">
           <div>
             <p>For media inquiries, collaboration requests, or general questions, reach out by email:</p>
@@ -255,6 +270,45 @@
             <li><a href="#">Placeholder University Faculty Profile</a></li>
           </ul>
         </div>
+
+        <!-- Static-site contact form via FormSubmit (formsubmit.co) -- no backend
+             required. TODO: swap the placeholder email below for a real inbox;
+             FormSubmit sends one confirmation email to that address the first
+             time the form is used, and a click on that link is required before
+             submissions start delivering. -->
+        <form
+          id="contact-form"
+          class="contact-form"
+          action="https://formsubmit.co/contact@anavujiclab.org"
+          data-ajax-action="https://formsubmit.co/ajax/contact@anavujiclab.org"
+          method="POST"
+        >
+          <h3>Send a Message</h3>
+          <div class="contact-form__row">
+            <div class="contact-form__field">
+              <label for="cf-name">Name</label>
+              <input type="text" id="cf-name" name="name" autocomplete="name" required>
+            </div>
+            <div class="contact-form__field">
+              <label for="cf-email">Email</label>
+              <input type="email" id="cf-email" name="email" autocomplete="email" required>
+            </div>
+          </div>
+          <div class="contact-form__field">
+            <label for="cf-message">Message</label>
+            <textarea id="cf-message" name="message" rows="5" required></textarea>
+          </div>
+          <!-- Honeypot: hidden from real visitors via CSS; bots that don't
+               render CSS tend to fill every field, which flags the submission
+               as spam to FormSubmit automatically. -->
+          <input type="text" name="_honey" class="contact-form__honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <input type="hidden" name="_subject" value="New message from anavujiclab.org">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_next" value="https://atgatzby.github.io/ANA-Branding-Page/index.html#contact">
+          <button type="submit" class="btn btn--primary">Send Message</button>
+          <p class="contact-form__status" role="status" aria-live="polite"></p>
+        </form>
       </div>
     </section>
 

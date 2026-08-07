@@ -101,4 +101,51 @@ document.addEventListener('DOMContentLoaded', () => {
 
     sections.forEach((section) => observer.observe(section));
   }
+
+  /* ---------------------------------------------------------------------
+   * 5. Contact form -- progressive enhancement over FormSubmit
+   *
+   * The form's plain `action` attribute already works with no JS at all
+   * (a normal POST to FormSubmit, which redirects back via `_next`). Here
+   * we intercept the submit and POST to FormSubmit's `/ajax/` endpoint
+   * instead, so a successful send shows an inline message without leaving
+   * the page.
+   * ------------------------------------------------------------------- */
+  const contactForm = document.getElementById('contact-form');
+
+  if (contactForm) {
+    const statusEl = contactForm.querySelector('.contact-form__status');
+    const submitBtn = contactForm.querySelector('button[type="submit"]');
+    const ajaxAction = contactForm.dataset.ajaxAction;
+
+    contactForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      statusEl.textContent = 'Sending…';
+      statusEl.removeAttribute('data-state');
+      submitBtn.disabled = true;
+
+      fetch(ajaxAction, {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body: new FormData(contactForm),
+      })
+        .then((response) => {
+          if (!response.ok) throw new Error('Request failed');
+          return response.json();
+        })
+        .then(() => {
+          statusEl.textContent = "Thanks — your message has been sent. We'll get back to you soon.";
+          statusEl.setAttribute('data-state', 'success');
+          contactForm.reset();
+        })
+        .catch(() => {
+          statusEl.textContent = 'Something went wrong. Please try again, or email us directly.';
+          statusEl.setAttribute('data-state', 'error');
+        })
+        .finally(() => {
+          submitBtn.disabled = false;
+        });
+    });
+  }
 });
