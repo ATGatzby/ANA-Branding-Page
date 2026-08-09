@@ -314,9 +314,9 @@ p {
   font-size: 0.875rem;
 }
 
-/* Card -- .research-card and .team-card are whole clickable cards (an <a>
-   wraps the full card rather than nesting a link inside it), so the hover
-   lift here is the visual cue that the entire card is interactive. */
+/* Card -- .team-card is a whole clickable card (an <a> wraps the full card
+   rather than nesting a link inside it); .research-question reuses the same
+   hover lift purely as a tactile touch, without being a link itself. */
 .card {
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
@@ -592,30 +592,30 @@ p {
   color: var(--color-muted);
 }
 
-.timeline {
-  margin-top: var(--space-3);
-  border-left: 2px solid var(--color-border);
-  padding-left: var(--space-3);
+/* Higher specificity than ".about__body p" (which sets a muted color for
+   ordinary paragraphs) so this credentials line keeps its own ink color. */
+.about__body .about__titles {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--color-navy);
+}
+
+.about__links {
+  margin-top: var(--space-2);
   display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
+  flex-wrap: wrap;
+  gap: var(--space-3);
 }
 
-.timeline__item {
-  position: relative;
-  padding-left: var(--space-1);
+.about__links a {
+  color: var(--color-accent);
+  font-weight: 600;
 }
 
-.timeline__item::before {
-  content: "";
-  position: absolute;
-  left: calc(-1 * var(--space-3) - 6px);
-  top: 0.35rem;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background-color: var(--color-accent);
-  border: 2px solid var(--color-surface);
+.about__links a:hover {
+  text-decoration: underline;
 }
 
 @media (min-width: 768px) {
@@ -626,50 +626,47 @@ p {
 
 /* === Research === */
 
-.research-card {
+.research-intro {
+  max-width: 65ch;
+  font-size: 1.125rem;
+  color: var(--color-text);
+}
+
+/* Three parallel, co-equal research questions -- deliberately not numbered
+   (01/02/03), since numbering implies a sequence and these three themes are
+   concurrent facets of one research program, not ordered steps. */
+.research-questions {
+  margin-top: var(--space-4);
+}
+
+.research-question {
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
+  border-top: 3px solid var(--color-accent);
   border-radius: var(--radius);
-  overflow: hidden;
+  padding: var(--space-3);
   box-shadow: var(--shadow-sm);
-  display: flex;
-  flex-direction: column;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-.research-card__image {
-  width: 100%;
-  aspect-ratio: 3 / 2;
-  overflow: hidden;
-  background-color: var(--color-bg);
+.research-question:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
 }
 
-.research-card__image img,
-.research-card__image svg {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.research-question__title {
+  font-size: var(--h3-size);
 }
 
-.research-card__title {
-  padding: var(--space-3) var(--space-3) 0;
-}
-
-.research-card__body {
-  padding: var(--space-2) var(--space-3) var(--space-3);
+.research-question__body {
+  margin-top: var(--space-2);
   color: var(--color-muted);
 }
 
-/* The whole card is the link (an <a> wraps title/image/body), so this is a
-   plain span styled to look like the old "Read more" link, not a nested <a>. */
-.research-card__cta {
-  margin-top: auto;
-  padding: 0 var(--space-3) var(--space-3);
-  font-weight: 600;
-  color: var(--color-accent);
-}
-
-.research-card:hover .research-card__cta {
-  text-decoration: underline;
+.research-outro {
+  max-width: 65ch;
+  margin-top: var(--space-4);
+  color: var(--color-muted);
 }
 
 /* === Publications === */
@@ -1100,27 +1097,11 @@ p {
   text-decoration: underline;
 }
 
-.site-footer__credit {
-  font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.55);
-}
-
-.site-footer__credit a {
-  color: rgba(255, 255, 255, 0.7);
-  text-decoration: underline;
-}
-
 @media (min-width: 768px) {
   .site-footer .container {
     flex-direction: row;
-    flex-wrap: wrap;
     justify-content: space-between;
     text-align: left;
-  }
-
-  .site-footer__credit {
-    flex-basis: 100%;
-    text-align: center;
   }
 }
 
