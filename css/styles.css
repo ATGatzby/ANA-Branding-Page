@@ -647,7 +647,6 @@ p {
 /* === Research === */
 
 .research-intro {
-  max-width: 65ch;
   font-size: 1.125rem;
   color: var(--color-text);
 }
@@ -688,7 +687,6 @@ p {
 }
 
 .research-outro {
-  max-width: 65ch;
   margin-top: var(--space-4);
   color: var(--color-muted);
 }
@@ -893,6 +891,43 @@ p {
 
 .join__body a:not(.btn):hover {
   text-decoration: underline;
+}
+
+/* === Photos ===
+   Uniform grid, no captions -- matches kosurilab.com/photos's plain
+   gallery-grid treatment. Every tile is a fixed square via object-fit,
+   so mixed portrait/landscape source photos still form a clean grid. */
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+}
+
+@media (min-width: 640px) {
+  .photo-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1000px) {
+  .photo-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.photo-grid__item {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: var(--radius);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.photo-grid__item:hover {
+  transform: scale(1.03);
+  box-shadow: var(--shadow-md);
 }
 
 /* === Donate === */
