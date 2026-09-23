@@ -848,6 +848,20 @@ p {
   text-decoration: underline;
 }
 
+/* === Philosophy === */
+
+.philosophy__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-width: 70ch;
+  margin-top: var(--space-4);
+}
+
+.philosophy__body p {
+  color: var(--color-text);
+}
+
 /* === Donate === */
 
 .donate__panel {
