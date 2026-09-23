@@ -664,7 +664,11 @@ p {
   border: 1px solid var(--color-border);
   border-top: 3px solid var(--color-accent);
   border-radius: var(--radius);
-  padding: var(--space-3);
+  /* Zero horizontal padding so the title/body text lines up with the
+     section's paragraph text and the card's own left edge, rather than
+     sitting indented -- only vertical padding is kept for breathing room. */
+  padding-block: var(--space-3);
+  padding-inline: 0;
   box-shadow: var(--shadow-sm);
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
@@ -1185,7 +1189,7 @@ p {
 
 .site-footer__links {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: center;
   gap: var(--space-3);
 }
@@ -1203,6 +1207,8 @@ p {
 @media (min-width: 768px) {
   .site-footer .container {
     flex-direction: row;
+    flex-wrap: wrap;
+    row-gap: var(--space-2);
     justify-content: space-between;
     text-align: left;
   }
