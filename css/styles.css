@@ -783,21 +783,34 @@ p {
   gap: var(--space-3);
 }
 
-@media (min-width: 700px) {
-  .person-row {
-    grid-template-columns: 220px 1fr;
-    gap: var(--space-4);
-    align-items: start;
-  }
-}
-
+/* Large, edge-to-edge editorial photo -- deliberately square-cornered
+   (unlike the site's rounded cards/buttons) so it reads as a photograph,
+   not a UI card. At desktop width it stretches to match the height of
+   the bio text beside it (grid row stretch), not a fixed thumbnail. */
 .person-row__photo {
   width: 100%;
-  max-width: 220px;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 3 / 4;
   object-fit: cover;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-sm);
+  object-position: 50% 20%;
+  border-radius: 0;
+  display: block;
+}
+
+@media (min-width: 700px) {
+  .person-row {
+    grid-template-columns: 360px 1fr;
+    gap: var(--space-5);
+    align-items: stretch;
+  }
+
+  .person-row__photo {
+    height: 100%;
+    aspect-ratio: auto;
+  }
+
+  .person-row__body {
+    padding-block: var(--space-2);
+  }
 }
 
 .person-row__name {
