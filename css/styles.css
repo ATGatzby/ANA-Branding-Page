@@ -314,9 +314,8 @@ p {
   font-size: 0.875rem;
 }
 
-/* Card -- .team-card is a whole clickable card (an <a> wraps the full card
-   rather than nesting a link inside it); .research-question reuses the same
-   hover lift purely as a tactile touch, without being a link itself. */
+/* Card -- shared surface for elements like .research-question. The hover
+   lift is a tactile touch, not a claim that every card is a link. */
 .card {
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
@@ -602,19 +601,40 @@ p {
   color: var(--color-navy);
 }
 
-.about__links {
+/* Structured contact/affiliation list -- a label:value definition list
+   rather than a plain link row, so each item reads clearly on its own. */
+.about__contact {
   margin-top: var(--space-2);
   display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-3);
+  flex-direction: column;
+  gap: var(--space-2);
 }
 
-.about__links a {
+.about__contact-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-1) var(--space-2);
+}
+
+.about__contact-item dt {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--color-navy);
+  min-width: 220px;
+}
+
+.about__contact-item dd {
+  margin: 0;
+}
+
+.about__contact-item dd a {
   color: var(--color-accent);
   font-weight: 600;
 }
 
-.about__links a:hover {
+.about__contact-item dd a:hover {
   text-decoration: underline;
 }
 
@@ -745,47 +765,74 @@ p {
   }
 }
 
-/* === Team === */
+/* === Team ===
+   Each person is a full-width row: photo left, name/title/bio/contact right
+   (stacked on mobile) -- rather than a compact card grid, so there's room
+   for a real biography per person once one is supplied. */
 
-.team-card {
-  text-align: center;
+.people-list {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: var(--space-1);
+  gap: var(--space-5);
+  margin-top: var(--space-4);
 }
 
-.team-card__photo {
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
-  overflow: hidden;
-  background-color: var(--color-bg);
-  border: 3px solid var(--color-surface);
-  box-shadow: var(--shadow-sm);
-  margin-bottom: var(--space-1);
+.person-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
 }
 
-.team-card__photo img,
-.team-card__photo svg {
+@media (min-width: 700px) {
+  .person-row {
+    grid-template-columns: 220px 1fr;
+    gap: var(--space-4);
+    align-items: start;
+  }
+}
+
+.person-row__photo {
   width: 100%;
-  height: 100%;
+  max-width: 220px;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
 }
 
-.team-card__name {
-  font-weight: 700;
-  color: var(--color-navy);
+.person-row__name {
+  font-size: var(--h3-size);
 }
 
-.team-card__role {
+.person-row__title {
   color: var(--color-muted);
-  font-size: 0.9rem;
+  margin-top: 0.2rem;
 }
 
-/* .team-card is itself an <a> (whole card clickable to the profile page) */
-.team-card {
-  cursor: pointer;
+.person-row__bio {
+  color: var(--color-text);
+  margin-top: var(--space-2);
+  max-width: 65ch;
+}
+
+.person-row__bio em {
+  color: var(--color-muted);
+}
+
+.person-row__contact {
+  margin-top: var(--space-2);
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.person-row__contact a {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+.person-row__contact a:hover {
+  text-decoration: underline;
 }
 
 /* === Donate === */
