@@ -663,11 +663,12 @@ p {
   border: 1px solid var(--color-border);
   border-top: 3px solid var(--color-accent);
   border-radius: var(--radius);
-  /* Zero horizontal padding so the title/body text lines up with the
-     section's paragraph text and the card's own left edge, rather than
-     sitting indented -- only vertical padding is kept for breathing room. */
+  /* Zero LEFT padding so the title/body text lines up with the section's
+     paragraph text and the card's own left edge, rather than sitting
+     indented. Right padding is kept so wrapped lines don't run flush
+     against the right border. */
   padding-block: var(--space-3);
-  padding-inline: 0;
+  padding-inline: 0 var(--space-3);
   box-shadow: var(--shadow-sm);
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
