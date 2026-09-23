@@ -178,7 +178,7 @@ p {
   margin-bottom: var(--space-3);
 }
 
-/* === Layout Primitives (.container, .section, .grid, .btn, .card) === */
+/* === Layout Primitives (.container, .section, .grid, .btn) === */
 
 .container {
   width: 100%;
@@ -312,22 +312,6 @@ p {
 .btn--sm {
   padding: 0.5rem 1rem;
   font-size: 0.875rem;
-}
-
-/* Card -- shared surface for elements like .research-question. The hover
-   lift is a tactile touch, not a claim that every card is a link. */
-.card {
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  padding: var(--space-3);
-  box-shadow: var(--shadow-sm);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-
-.card:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-md);
 }
 
 /* === Header / Nav === */
@@ -658,24 +642,14 @@ p {
   margin-top: var(--space-4);
 }
 
+/* No bordered box -- a bounded card kept creating left/right padding
+   fights with the plain paragraph text around it. Matches the plain,
+   box-free typography used elsewhere (About, Philosophy): just a thin
+   top rule to separate the four questions, text flows naturally at the
+   same left position as everything else in the section. */
 .research-question {
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
   border-top: 3px solid var(--color-accent);
-  border-radius: var(--radius);
-  /* Zero LEFT padding so the title/body text lines up with the section's
-     paragraph text and the card's own left edge, rather than sitting
-     indented. Right padding is kept so wrapped lines don't run flush
-     against the right border. */
-  padding-block: var(--space-3);
-  padding-inline: 0 var(--space-3);
-  box-shadow: var(--shadow-sm);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-
-.research-question:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-md);
+  padding-top: var(--space-3);
 }
 
 .research-question__title {
