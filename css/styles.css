@@ -862,6 +862,29 @@ p {
   color: var(--color-text);
 }
 
+/* === Join === */
+
+.join__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-width: 70ch;
+  margin-top: var(--space-4);
+}
+
+.join__body p {
+  color: var(--color-text);
+}
+
+.join__body a {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+.join__body a:hover {
+  text-decoration: underline;
+}
+
 /* === Donate === */
 
 .donate__panel {
