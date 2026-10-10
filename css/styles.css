@@ -603,46 +603,36 @@ p {
   color: var(--color-navy);
 }
 
-/* Structured contact/affiliation list -- a label:value definition list
-   rather than a plain link row, so each item reads clearly on its own. */
-.about__contact {
-  margin-top: var(--space-2);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
+/* Photo + links stacked in the left column on wide screens, bio on the
+   right. On mobile: photo, bio, then links. */
+.about__grid {
+  grid-template-areas:
+    "image"
+    "body"
+    "links";
 }
 
-.about__contact-item {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: var(--space-1) var(--space-2);
+.about__image {
+  grid-area: image;
 }
 
-.about__contact-item dt {
-  font-family: var(--font-body);
-  font-weight: 700;
-  font-size: 0.95rem;
-  color: var(--color-navy);
-  min-width: 220px;
+.about__body {
+  grid-area: body;
 }
 
-.about__contact-item dd {
-  margin: 0;
-}
-
-.about__contact-item dd a {
-  color: var(--color-accent);
-  font-weight: 600;
-}
-
-.about__contact-item dd a:hover {
-  text-decoration: underline;
+.about__links {
+  grid-area: links;
+  border-top: 1px solid var(--color-border);
 }
 
 @media (min-width: 768px) {
   .about__grid {
     grid-template-columns: 1fr 2fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+      "image body"
+      "links body";
+    row-gap: var(--space-3);
   }
 }
 
@@ -688,9 +678,10 @@ p {
 
 /* Grouped by research theme, box-free like the research questions: each
    theme gets the same 3px accent top rule, papers are separated by
-   hairlines. A theme with a representative figure puts it beside its
-   papers on wide screens (--with-figure); without one, papers run full
-   width. */
+   hairlines. On wide screens the figure sits left and the theme title
+   + papers sit right, so the title lines up with the top of the figure.
+   Every figure gets the same fixed-ratio frame (object-fit: contain), so
+   differently shaped source figures still read as one consistent set. */
 .pub-groups {
   display: flex;
   flex-direction: column;
@@ -699,47 +690,61 @@ p {
 }
 
 .pub-group {
-  border-top: 3px solid var(--color-accent);
-  padding-top: var(--space-3);
-}
-
-.pub-group__title {
-  font-size: var(--h3-size);
-  max-width: 40ch;
-}
-
-.pub-group__body {
   display: grid;
-  gap: var(--space-4);
-  margin-top: var(--space-3);
+  grid-template-areas:
+    "title"
+    "figure"
+    "papers";
+  gap: var(--space-3);
+  padding-top: var(--space-4);
+  border-top: 3px solid var(--color-accent);
 }
 
 @media (min-width: 900px) {
-  .pub-group__body--with-figure {
-    grid-template-columns: 5fr 7fr;
+  .pub-group {
+    grid-template-columns: 400px 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+      "figure title"
+      "figure papers";
+    column-gap: var(--space-5);
     align-items: start;
   }
 }
 
+.pub-group__title {
+  grid-area: title;
+  font-size: var(--h3-size);
+}
+
 .pub-group__figure {
+  grid-area: figure;
+  aspect-ratio: 3 / 2;
+  padding: var(--space-2);
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
-  overflow: hidden;
   background-color: #FFFFFF;
 }
 
 .pub-group__figure a {
   display: block;
+  height: 100%;
   cursor: zoom-in;
 }
 
 .pub-group__figure img {
   width: 100%;
+  height: 100%;
+  object-fit: contain;
   transition: opacity 0.15s ease;
 }
 
 .pub-group__figure a:hover img {
   opacity: 0.9;
+}
+
+.pub-list {
+  grid-area: papers;
 }
 
 .pub-item {
@@ -893,8 +898,9 @@ p {
     aspect-ratio: auto;
   }
 
+  /* No top padding: the name starts level with the top of the photo. */
   .person-row__body {
-    padding-block: var(--space-2);
+    padding-bottom: var(--space-2);
   }
 }
 
@@ -1063,41 +1069,180 @@ p {
 
 /* === Contact === */
 
+/* Two columns on wide screens: email + profile links on the left, the
+   message form as a white card on the right. Profile links are rows with
+   a logo tile, name and handle, separated by hairlines (same rhythm as the
+   publication list) rather than loose accent-coloured text links. */
 .contact__grid {
   display: grid;
-  gap: var(--space-4);
+  gap: var(--space-5);
   grid-template-columns: 1fr;
 }
 
+@media (min-width: 960px) {
+  .contact__grid {
+    grid-template-columns: 5fr 7fr;
+    align-items: start;
+  }
+}
+
+.contact__intro {
+  max-width: 44ch;
+}
+
+.contact__email {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: var(--space-2);
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 600;
+  font-variant-numeric: lining-nums;
+  color: var(--color-navy);
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 4px;
+  transition: text-decoration-color 0.15s ease;
+}
+
+.contact__email:hover {
+  text-decoration-color: var(--color-accent);
+}
+
+.contact__email-icon {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: var(--color-accent);
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.contact__label {
+  margin-top: var(--space-5);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--ls-label);
+  color: var(--color-muted);
+}
+
 .contact__links {
+  margin-top: var(--space-2);
+  border-top: 1px solid var(--color-border);
+}
+
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding-block: 0.85rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.contact-link::after {
+  content: "\2197";
+  content: "\2197" / "";
+  margin-left: auto;
+  padding-left: var(--space-1);
+  color: var(--color-muted);
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.contact-link:hover::after {
+  color: var(--color-accent);
+  transform: translate(2px, -2px);
+}
+
+.contact-link[href^="mailto:"]::after {
+  content: none;
+}
+
+/* White tile behind each mark -- LinkedIn asks for its logo on white. */
+.contact-link__icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  background-color: var(--color-surface);
+  transition: border-color 0.15s ease;
+}
+
+.contact-link:hover .contact-link__icon {
+  border-color: var(--color-accent);
+}
+
+/* 22px keeps the LinkedIn [in] above its 21px on-screen minimum. */
+.contact-link__icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.contact-link__icon--linkedin svg {
+  fill: #0A66C2;
+}
+
+.contact-link__icon--x svg {
+  fill: #000000;
+}
+
+.contact-link__icon--orcid svg {
+  fill: #A6CE39;
+}
+
+.contact-link__icon--outline svg {
+  fill: none;
+  stroke: var(--color-navy);
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.contact-link__text {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
+  min-width: 0;
 }
 
-.contact__links a {
-  color: var(--color-accent);
+.contact-link__name {
   font-weight: 600;
+  color: var(--color-navy);
+  line-height: 1.35;
+  text-underline-offset: 3px;
 }
 
-.contact__links a:hover {
+.contact-link:hover .contact-link__name {
   text-decoration: underline;
 }
 
-@media (min-width: 768px) {
-  .contact__grid {
-    grid-template-columns: 1fr 1fr;
-  }
+.contact-link__meta {
+  font-size: 0.875rem;
+  color: var(--color-muted);
+  overflow-wrap: anywhere;
 }
 
 /* === Contact Form === */
 
 .contact-form {
-  margin-top: var(--space-5);
-  max-width: 640px;
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
+  padding: var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background-color: var(--color-surface);
+}
+
+@media (min-width: 640px) {
+  .contact-form {
+    padding: var(--space-4);
+  }
 }
 
 .contact-form h3 {
@@ -1136,7 +1281,8 @@ p {
   font-family: inherit;
   font-size: 1rem;
   color: var(--color-text);
-  background-color: var(--color-surface);
+  /* Tinted fields read clearly against the white form card. */
+  background-color: var(--color-bg);
   resize: vertical;
 }
 
