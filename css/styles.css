@@ -1079,10 +1079,22 @@ p {
   grid-template-columns: 1fr;
 }
 
+/* Columns stretch to the same height, so the form card's top and bottom
+   line up with the intro text and the last profile row; the message box
+   grows to take up the extra height. */
 @media (min-width: 960px) {
   .contact__grid {
     grid-template-columns: 5fr 7fr;
-    align-items: start;
+    align-items: stretch;
+  }
+
+  .contact-form__field--message {
+    flex: 1;
+  }
+
+  .contact-form__field--message textarea {
+    flex: 1;
+    min-height: 8rem;
   }
 }
 
@@ -1305,7 +1317,6 @@ p {
 .contact-form__status {
   font-size: 0.9rem;
   font-weight: 600;
-  min-height: 1.2em;
 }
 
 .contact-form__status[data-state="success"] {
@@ -1316,8 +1327,13 @@ p {
   color: var(--color-donate-dark);
 }
 
-.contact-form .btn {
-  align-self: flex-start;
+/* Button and status message share one row, so the empty status line
+   doesn't leave a gap at the bottom of the card. */
+.contact-form__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1) var(--space-2);
 }
 
 /* === Detail Pages (research articles & team profiles) === */
