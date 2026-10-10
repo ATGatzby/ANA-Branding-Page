@@ -513,41 +513,59 @@ p {
 
 /* === Stats === */
 
+/* A quiet tinted band between hero and About: two editorial figures in
+   the serif display face, separated by a hairline, each with the same
+   short accent rule used under section headings. */
 .stats {
   padding-block: var(--space-5);
+  background-color: var(--color-bg);
+  border-block: 1px solid var(--color-border);
 }
 
 .stats__grid {
   display: grid;
-  gap: var(--space-4);
   grid-template-columns: repeat(2, 1fr);
+  max-width: 760px;
+  margin-inline: auto;
   text-align: center;
 }
 
 .stat {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  align-items: center;
+  padding-inline: var(--space-2);
+}
+
+.stat + .stat {
+  border-left: 1px solid var(--color-border);
 }
 
 .stat__number {
-  font-size: clamp(2rem, 1.6rem + 1.6vw, 3rem);
-  font-weight: 800;
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 1.9rem + 2.4vw, 4rem);
+  font-weight: 700;
+  font-variant-numeric: lining-nums;
+  letter-spacing: var(--ls-heading);
   color: var(--color-navy);
   line-height: 1;
 }
 
 .stat__label {
-  color: var(--color-muted);
-  font-size: 0.9rem;
+  font-size: 0.75rem;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: var(--ls-label);
+  color: var(--color-muted);
 }
 
-@media (min-width: 768px) {
-  .stats__grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
+.stat__label::before {
+  content: "";
+  display: block;
+  width: 32px;
+  height: 2px;
+  margin: var(--space-2) auto;
+  background-color: var(--color-accent);
 }
 
 /* === About === */
@@ -668,29 +686,119 @@ p {
 
 /* === Publications === */
 
-.pub-list {
+/* Grouped by research theme, box-free like the research questions: each
+   theme gets the same 3px accent top rule, papers are separated by
+   hairlines. A theme with a representative figure puts it beside its
+   papers on wide screens (--with-figure); without one, papers run full
+   width. */
+.pub-groups {
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
+  gap: var(--space-5);
+  margin-top: var(--space-4);
+}
+
+.pub-group {
+  border-top: 3px solid var(--color-accent);
+  padding-top: var(--space-3);
+}
+
+.pub-group__title {
+  font-size: var(--h3-size);
+  max-width: 40ch;
+}
+
+.pub-group__body {
+  display: grid;
+  gap: var(--space-4);
+  margin-top: var(--space-3);
+}
+
+@media (min-width: 900px) {
+  .pub-group__body--with-figure {
+    grid-template-columns: 5fr 7fr;
+    align-items: start;
+  }
+}
+
+.pub-group__figure {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background-color: #FFFFFF;
+}
+
+.pub-group__figure a {
+  display: block;
+  cursor: zoom-in;
+}
+
+.pub-group__figure img {
+  width: 100%;
+  transition: opacity 0.15s ease;
+}
+
+.pub-group__figure a:hover img {
+  opacity: 0.9;
 }
 
 .pub-item {
-  padding: var(--space-3);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  background-color: var(--color-surface);
+  padding-block: var(--space-3);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.pub-item:first-child {
+  padding-top: 0;
+}
+
+.pub-item:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
 }
 
 .pub-item__title {
   font-size: 1.05rem;
-  font-weight: 700;
+  font-weight: 600;
+  line-height: 1.45;
   color: var(--color-navy);
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 3px;
+  transition: text-decoration-color 0.15s ease;
 }
 
-.pub-item__meta {
-  margin-top: 0.25rem;
-  color: var(--color-muted);
+.pub-item__title:hover {
+  text-decoration-color: currentColor;
+}
+
+/* Non-breaking space keeps the arrow glued to the last word of the title. */
+.pub-item__title::after {
+  content: "\00a0\2197";
+  content: "\00a0\2197" / "";
+  color: var(--color-accent);
+}
+
+.pub-item__authors {
+  margin-top: var(--space-1);
   font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--color-muted);
+}
+
+.pub-item__authors strong {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.pub-item__note {
+  margin-top: 0.25rem;
+  font-size: 0.8rem;
+  font-style: italic;
+  color: var(--color-muted);
+}
+
+.pub-more {
+  margin-top: var(--space-5);
 }
 
 /* === Media === */
@@ -823,6 +931,18 @@ p {
 
 .person-row__contact a:hover {
   text-decoration: underline;
+}
+
+/* Former members: same profile-row format, introduced by the 3px accent
+   rule used for the research-question and publication-theme headings. */
+.team-alumni {
+  margin-top: var(--space-6);
+  padding-top: var(--space-3);
+  border-top: 3px solid var(--color-accent);
+}
+
+.team-alumni__title {
+  font-size: calc(var(--h3-size) * 1.25);
 }
 
 /* === Philosophy === */
