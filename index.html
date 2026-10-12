@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=15">
+  <link rel="stylesheet" href="css/styles.css?v=19">
 </head>
 <body>
   <header class="site-header">
@@ -63,6 +63,54 @@
             <p class="stat__number">£5M+</p>
             <p class="stat__label">Raised for Research</p>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FUNDERS TICKER ============ -->
+    <!-- Kopper House-style running ticker. The moving track is decorative
+         (aria-hidden) and repeats one set of funders six times so the loop
+         is seamless on wide screens; screen readers get the plain list
+         instead. Pauses on hover; stays still under reduced motion. -->
+    <section class="funders" aria-label="Funders">
+      <p class="funders__label">Supported by</p>
+      <ul class="sr-only">
+        <li>British Heart Foundation</li>
+        <li>AstraZeneca</li>
+        <li>Isaac Newton Trust</li>
+      </ul>
+      <div class="funders__viewport" aria-hidden="true">
+        <div class="funders__track">
+          <ul class="funders__group">
+            <li class="funder"><img src="images/funders/british-heart-foundation.jpg" alt="" width="41" height="48"><span>British Heart Foundation</span></li>
+            <li class="funder"><img src="images/funders/astrazeneca.jpg" alt="" width="38" height="48"><span>AstraZeneca</span></li>
+            <li class="funder"><img src="images/funders/isaac-newton-trust.jpg" alt="" width="48" height="48"><span>Isaac Newton Trust</span></li>
+          </ul>
+          <ul class="funders__group">
+            <li class="funder"><img src="images/funders/british-heart-foundation.jpg" alt="" width="41" height="48"><span>British Heart Foundation</span></li>
+            <li class="funder"><img src="images/funders/astrazeneca.jpg" alt="" width="38" height="48"><span>AstraZeneca</span></li>
+            <li class="funder"><img src="images/funders/isaac-newton-trust.jpg" alt="" width="48" height="48"><span>Isaac Newton Trust</span></li>
+          </ul>
+          <ul class="funders__group">
+            <li class="funder"><img src="images/funders/british-heart-foundation.jpg" alt="" width="41" height="48"><span>British Heart Foundation</span></li>
+            <li class="funder"><img src="images/funders/astrazeneca.jpg" alt="" width="38" height="48"><span>AstraZeneca</span></li>
+            <li class="funder"><img src="images/funders/isaac-newton-trust.jpg" alt="" width="48" height="48"><span>Isaac Newton Trust</span></li>
+          </ul>
+          <ul class="funders__group">
+            <li class="funder"><img src="images/funders/british-heart-foundation.jpg" alt="" width="41" height="48"><span>British Heart Foundation</span></li>
+            <li class="funder"><img src="images/funders/astrazeneca.jpg" alt="" width="38" height="48"><span>AstraZeneca</span></li>
+            <li class="funder"><img src="images/funders/isaac-newton-trust.jpg" alt="" width="48" height="48"><span>Isaac Newton Trust</span></li>
+          </ul>
+          <ul class="funders__group">
+            <li class="funder"><img src="images/funders/british-heart-foundation.jpg" alt="" width="41" height="48"><span>British Heart Foundation</span></li>
+            <li class="funder"><img src="images/funders/astrazeneca.jpg" alt="" width="38" height="48"><span>AstraZeneca</span></li>
+            <li class="funder"><img src="images/funders/isaac-newton-trust.jpg" alt="" width="48" height="48"><span>Isaac Newton Trust</span></li>
+          </ul>
+          <ul class="funders__group">
+            <li class="funder"><img src="images/funders/british-heart-foundation.jpg" alt="" width="41" height="48"><span>British Heart Foundation</span></li>
+            <li class="funder"><img src="images/funders/astrazeneca.jpg" alt="" width="38" height="48"><span>AstraZeneca</span></li>
+            <li class="funder"><img src="images/funders/isaac-newton-trust.jpg" alt="" width="48" height="48"><span>Isaac Newton Trust</span></li>
+          </ul>
         </div>
       </div>
     </section>
@@ -241,55 +289,63 @@
         <div class="section__divider"></div>
 
         <div class="philosophy__body">
-          <h3>Our Scientific Philosophy</h3>
-          <p>
-            We study how the heart adapts to stress, what makes it resilient,
-            and what happens when that resilience begins to fail. Exercise
-            isn&rsquo;t the endpoint of our research; it is a biological model
-            for understanding resilience. By uncovering the mechanisms that
-            allow the heart to adapt, we want to understand when and why this
-            capacity is lost &mdash; and whether we can intervene before
-            cardiac dysfunction becomes established. We are motivated by the
-            idea that understanding the biology of resilience may ultimately
-            help us move from treating disease to preventing it.
-          </p>
+          <div class="philosophy__block">
+            <h3>Our Scientific Philosophy</h3>
+            <div class="philosophy__text">
+              <p>
+                We study how the heart adapts to stress, what makes it resilient,
+                and what happens when that resilience begins to fail. Exercise
+                isn&rsquo;t the endpoint of our research; it is a biological model
+                for understanding resilience. By uncovering the mechanisms that
+                allow the heart to adapt, we want to understand when and why this
+                capacity is lost &mdash; and whether we can intervene before
+                cardiac dysfunction becomes established. We are motivated by the
+                idea that understanding the biology of resilience may ultimately
+                help us move from treating disease to preventing it.
+              </p>
+            </div>
+          </div>
 
-          <h3>How We Work</h3>
-          <p>
-            We believe that good science is built by good people. We want
-            the lab to be a vibrant, curious and supportive place where
-            people are motivated to ask ambitious questions, challenge ideas
-            and learn from one another.
-          </p>
-          <p>
-            We care about people as well as science. Kindness, respect,
-            generosity and integrity are fundamental to how we work
-            together. Science can be demanding and uncertain, and we believe
-            people do their best work when they feel supported, valued and
-            able to be themselves.
-          </p>
-          <p>
-            We believe in people and their potential. Training the next
-            generation of scientists is central to the lab. We want people
-            to leave the lab not only with strong scientific skills, but
-            with the confidence, independence and critical thinking to
-            develop their own ideas and make meaningful contributions.
-          </p>
-          <p>
-            We want our science to matter and make a difference. Research
-            does not always move in a straight line, and there will
-            inevitably be experiments that fail, difficult periods and
-            unanswered questions. We want to create a culture where
-            curiosity, persistence and optimism keep us moving forward.
-          </p>
-          <p>
-            We are motivated by fundamental biological questions, but
-            ultimately want our work to contribute to better understanding,
-            prevention and treatment of cardiovascular and cardiometabolic
-            disease and to have a positive impact on society, and
-            ultimately help people not only live longer, but live healthier
-            lives.
-          </p>
+          <div class="philosophy__block">
+            <h3>How We Work</h3>
+            <div class="philosophy__text">
+              <p>
+                We believe that good science is built by good people. We want
+                the lab to be a vibrant, curious and supportive place where
+                people are motivated to ask ambitious questions, challenge ideas
+                and learn from one another.
+              </p>
+              <p>
+                We care about people as well as science. Kindness, respect,
+                generosity and integrity are fundamental to how we work
+                together. Science can be demanding and uncertain, and we believe
+                people do their best work when they feel supported, valued and
+                able to be themselves.
+              </p>
+              <p>
+                We believe in people and their potential. Training the next
+                generation of scientists is central to the lab. We want people
+                to leave the lab not only with strong scientific skills, but
+                with the confidence, independence and critical thinking to
+                develop their own ideas and make meaningful contributions.
+              </p>
+              <p>
+                We want our science to matter and make a difference. Research
+                does not always move in a straight line, and there will
+                inevitably be experiments that fail, difficult periods and
+                unanswered questions. We want to create a culture where
+                curiosity, persistence and optimism keep us moving forward.
+              </p>
+              <p>
+                We are motivated by fundamental biological questions, but
+                ultimately want our work to contribute to better understanding,
+                prevention and treatment of cardiovascular and cardiometabolic
+                disease and to have a positive impact on society, and
+                ultimately help people not only live longer, but live healthier
+                lives.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -408,28 +464,41 @@
         <!-- TODO: Mahajan's photo is still a placeholder. -->
         <div class="people-list">
           <div class="person-row">
-            <img class="person-row__photo" src="images/team-satoshi-bujo.jpg" alt="Photo of Satoshi Bujo">
+            <img class="person-row__photo person-row__photo--low" src="images/team-satoshi-bujo-hlri.jpg" alt="Satoshi Bujo outside the Victor Phillip Dahdaleh Heart and Lung Research Institute" width="240" height="320">
             <div class="person-row__body">
               <h3 class="person-row__name">Satoshi Bujo, MD, Ph.D.</h3>
               <p class="person-row__title">Postdoctoral Fellow</p>
               <p class="person-row__bio">
-                I am a clinician-scientist and Postdoctoral Fellow
-                supported by the Japan Heart Foundation &ndash; Japan
-                Circulation Society Overseas Research Fellowship. I
-                completed my MD at Hokkaido University School of
-                Medicine in 2012 and my PhD in Cardiovascular Medicine
-                at the University of Tokyo in 2021.
+                I am a cardiologist and clinician-scientist who joined
+                the Vujic Lab in December 2024 as a postdoctoral
+                researcher, supported by overseas research fellowships
+                from the Japan Heart Foundation&ndash;Japan
+                Circulation Society and the Fukuda Foundation for
+                Medical Technology. I received my MD from Hokkaido
+                University in 2012 and my PhD in Cardiovascular
+                Medicine from the University of Tokyo in 2021.
               </p>
               <p class="person-row__bio">
-                My previous work focused on ischaemic heart failure,
-                particularly cardiac lipid metabolism and membrane
-                lipid composition.
+                My research is driven by questions arising from
+                clinical practice. My previous work investigated how
+                cardiac lipid metabolism and membrane phospholipid
+                remodelling contribute to cardiac dysfunction in
+                pressure overload-induced heart failure.
               </p>
               <p class="person-row__bio">
-                My current work focuses on cardiometabolic HFpEF,
-                investigating how circadian rhythms and different
-                exercise modalities influence the heart and skeletal
-                muscle.
+                My current research focuses on cardiometabolic heart
+                failure with preserved ejection fraction (HFpEF), a
+                condition for which effective treatment options remain
+                limited. I am exploring how different exercise
+                modalities influence cardiac function and associated
+                circadian and metabolic programmes. Through this work,
+                I hope to identify new therapeutic opportunities for
+                patients with HFpEF.
+              </p>
+              <p class="person-row__bio">
+                Outside the lab, I enjoy exploring Cambridge&rsquo;s
+                parks with my wife and three children, as well as
+                running to unwind.
               </p>
             </div>
           </div>
@@ -778,6 +847,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=15"></script>
+  <script src="js/main.js?v=19"></script>
 </body>
 </html>
