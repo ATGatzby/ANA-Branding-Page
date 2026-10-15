@@ -471,10 +471,12 @@ p {
   order: 2;
 }
 
+/* Full width on phones: the hero photo is a landscape group shot, so a
+   narrow portrait-sized frame would make the people too small. */
 .hero__image {
   order: 1;
   justify-self: center;
-  width: min(320px, 80%);
+  width: 100%;
 }
 
 .hero__image img,
@@ -510,7 +512,7 @@ p {
 
 @media (min-width: 768px) {
   .hero .container {
-    grid-template-columns: 3fr 2fr;
+    grid-template-columns: 1fr 1fr;
   }
 
   .hero__content {
