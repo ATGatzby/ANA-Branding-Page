@@ -145,12 +145,15 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* lining-nums: Playfair's default old-style "1" reads as an "i" in
+   headings like "Runx1". */
 h1, h2, h3, h4 {
   font-family: var(--font-heading);
   color: var(--color-navy);
   line-height: 1.2;
   font-weight: 700;
   letter-spacing: var(--ls-heading);
+  font-variant-numeric: lining-nums;
   text-wrap: balance;
 }
 
@@ -274,6 +277,20 @@ p {
   cursor: pointer;
   transition: background-color 0.15s ease, border-color 0.15s ease,
     color 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+}
+
+/* Long labels ("Full list of publications on ORCID") may wrap on the
+   narrowest phones instead of running past the screen edge. */
+.btn {
+  max-width: 100%;
+}
+
+@media (max-width: 359px) {
+  .btn {
+    white-space: normal;
+    text-align: center;
+    line-height: 1.3;
+  }
 }
 
 .btn:active {
@@ -613,7 +630,7 @@ p {
 /* Kopper House-style running strip under the stats band: funder logo +
    name in small spaced capitals, separated by dots, scrolling right to
    left. White background because the supplied logos are JPEGs on white.
-   The track holds six identical groups and moves by exactly half its
+   The track holds ten identical groups and moves by exactly half its
    width, so the loop has no visible seam. */
 .funders {
   position: relative;
@@ -977,12 +994,13 @@ p {
   margin-bottom: var(--space-4);
 }
 
-/* Three tiles across at every width: a 2-column phone grid left the
-   third tile ("Broadcast") stranded on its own row. */
+/* Two tiles (Press, Podcast) side by side at every width, capped so
+   they don't balloon on desktop. */
 .press-grid {
   display: grid;
   gap: var(--space-2);
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 720px;
 }
 
 .press-tile {
@@ -1025,6 +1043,175 @@ p {
   }
 }
 
+/* === Press & Events page (press.html) ===
+   A photo wall in CSS columns so portrait and landscape shots keep their
+   natural shape (nothing cropped -- several are posters/certificates).
+   Each photo opens full size; event label + caption sit underneath. */
+.press-page .breadcrumb {
+  margin-bottom: var(--space-3);
+}
+
+.press-page__title {
+  font-size: var(--h2-size);
+}
+
+.press-page__intro {
+  max-width: 60ch;
+  color: var(--color-muted);
+}
+
+.press-gallery {
+  margin-top: var(--space-4);
+  column-gap: var(--space-4);
+}
+
+@media (min-width: 640px) {
+  .press-gallery {
+    columns: 2;
+  }
+}
+
+@media (min-width: 1024px) {
+  .press-gallery {
+    columns: 3;
+  }
+}
+
+.press-item {
+  break-inside: avoid;
+  margin-bottom: var(--space-4);
+}
+
+/* Featured item above the photo wall: the largest image on the page,
+   with its caption beside it from tablets up. */
+.press-item--featured {
+  margin-top: var(--space-4);
+  margin-bottom: var(--space-5);
+}
+
+@media (min-width: 768px) {
+  .press-item--featured {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 4fr);
+    column-gap: var(--space-5);
+    align-items: center;
+  }
+
+  .press-item--featured figcaption {
+    margin-top: 0;
+  }
+
+  .press-item--featured .press-item__text {
+    margin-top: var(--space-1);
+    font-family: var(--font-heading);
+    font-size: var(--h3-size);
+    font-variant-numeric: lining-nums;
+    line-height: 1.35;
+    color: var(--color-navy);
+  }
+}
+
+/* Direct child only: the photo link. Caption links stay plain. */
+.press-item > a {
+  display: block;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  cursor: zoom-in;
+}
+
+.press-item img {
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+.press-item > a:hover img {
+  transform: scale(1.02);
+}
+
+.press-item figcaption {
+  margin-top: var(--space-2);
+}
+
+.press-item__event {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--ls-label);
+  color: var(--color-accent);
+}
+
+.press-item__text {
+  margin-top: 0.35rem;
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+/* Optional outbound link under a caption (e.g. the event's website). */
+.press-item__link {
+  display: inline-block;
+  margin-top: var(--space-1);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  text-underline-offset: 3px;
+}
+
+.press-item__link::after {
+  content: "\00a0\2197";
+  content: "\00a0\2197" / "";
+}
+
+.press-item__link:hover {
+  text-decoration: underline;
+}
+
+/* === Podcast & Interviews page (podcast.html) ===
+   Box-free list like the publication themes: 3px accent rule per item,
+   small meta line, show name, serif title, description, then a button. */
+.episodes {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  margin-top: var(--space-4);
+}
+
+.episode {
+  max-width: 72ch;
+  padding-top: var(--space-3);
+  border-top: 3px solid var(--color-accent);
+}
+
+.episode__meta {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--ls-label);
+  color: var(--color-accent);
+}
+
+.episode__show {
+  margin-top: var(--space-1);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-muted);
+}
+
+.episode__title {
+  margin-top: 0.25rem;
+  font-size: var(--h3-size);
+}
+
+.episode__text {
+  margin-top: var(--space-2);
+}
+
+.episode__link {
+  margin-top: var(--space-3);
+}
+
 /* === Team ===
    Each person is a full-width row: photo left, name/title/bio/contact right
    (stacked on mobile) -- rather than a compact card grid, so there's room
@@ -1054,12 +1241,6 @@ p {
   object-position: 50% 20%;
   border-radius: 0;
   display: block;
-}
-
-/* For photos where the person stands low in the frame (e.g. Satoshi in
-   front of the HLRI building): keep them in view if the frame crops. */
-.person-row__photo--low {
-  object-position: 50% 75%;
 }
 
 /* Tablets get a narrower photo column (240px) so the bio column keeps
@@ -1214,13 +1395,9 @@ p {
   margin-top: var(--space-4);
 }
 
-@media (min-width: 640px) {
-  .photo-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (min-width: 1000px) {
+/* 2 columns on phones, 4 from tablets up: 16 photos fill every row
+   exactly (a 3-column step left one photo alone on the last row). */
+@media (min-width: 768px) {
   .photo-grid {
     grid-template-columns: repeat(4, 1fr);
   }
@@ -1687,11 +1864,12 @@ p {
   text-align: center;
 }
 
+/* Wraps on very narrow phones (320px) rather than overflowing. */
 .site-footer__links {
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   justify-content: center;
-  gap: var(--space-3);
+  gap: var(--space-1) var(--space-3);
 }
 
 .site-footer__links a {
