@@ -134,13 +134,19 @@ document.addEventListener('DOMContentLoaded', () => {
           if (!response.ok) throw new Error('Request failed');
           return response.json();
         })
-        .then(() => {
+        .then((data) => {
+          // FormSubmit answers HTTP 200 even when it did NOT deliver (e.g. the
+          // form still awaits its one-time activation), with success: "false".
+          // Only report success when it explicitly says so.
+          if (String(data && data.success) !== 'true') {
+            throw new Error((data && data.message) || 'Message not delivered');
+          }
           statusEl.textContent = "Thanks — your message has been sent. We'll get back to you soon.";
           statusEl.setAttribute('data-state', 'success');
           contactForm.reset();
         })
         .catch(() => {
-          statusEl.textContent = 'Something went wrong. Please try again, or email us directly.';
+          statusEl.textContent = "Sorry, your message couldn't be sent. Please email us directly at av335@cam.ac.uk.";
           statusEl.setAttribute('data-state', 'error');
         })
         .finally(() => {

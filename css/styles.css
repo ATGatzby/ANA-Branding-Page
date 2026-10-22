@@ -630,7 +630,7 @@ p {
 /* Kopper House-style running strip under the stats band: funder logo +
    name in small spaced capitals, separated by dots, scrolling right to
    left. White background because the supplied logos are JPEGs on white.
-   The track holds ten identical groups and moves by exactly half its
+   The track holds six identical groups and moves by exactly half its
    width, so the loop has no visible seam. */
 .funders {
   position: relative;
