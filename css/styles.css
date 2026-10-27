@@ -1212,6 +1212,87 @@ p {
   margin-top: var(--space-3);
 }
 
+/* === BHF visit (press.html) ===
+   A highlighted navy band between the page intro and the press items, so
+   the visit reads as its own section. Photos sit in six equal 4:3 tiles. */
+.press-page:not(.press-page--items) {
+  padding-bottom: var(--space-4);
+}
+
+.press-page--items {
+  padding-top: var(--space-5);
+}
+
+.bhf-visit {
+  padding-block: var(--space-5);
+  background-color: var(--color-navy);
+  color: #FFFFFF;
+}
+
+.bhf-visit__head {
+  display: grid;
+  gap: var(--space-1);
+  max-width: 1040px; /* same width as the photo grid */
+}
+
+.bhf-visit__meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--ls-label);
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.bhf-visit__pill {
+  padding: 0.3rem 0.65rem;
+  border-radius: 999px;
+  background-color: var(--color-donate);
+  color: #FFFFFF;
+}
+
+.bhf-visit__title {
+  margin-bottom: var(--space-1);
+  font-size: var(--h2-size);
+  color: #FFFFFF;
+}
+
+.bhf-visit__text {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.bhf-visit__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+}
+
+/* Six equal tiles. The source photos are only 320px wide, so the grid is
+   capped at 1040px: each tile then shows at about its real size (~330px)
+   instead of being stretched and blurred. */
+@media (min-width: 768px) {
+  .bhf-visit__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    max-width: 1040px;
+  }
+}
+
+.bhf-visit__photo {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Portrait shots: keep faces in frame when cropped to 4:3. */
+.bhf-visit__photo--top {
+  object-position: 50% 30%;
+}
+
 /* === Team ===
    Each person is a full-width row: photo left, name/title/bio/contact right
    (stacked on mobile) -- rather than a compact card grid, so there's room
