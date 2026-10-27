@@ -1270,12 +1270,12 @@ p {
   margin-top: var(--space-4);
 }
 
-/* Six equal tiles. The source photos are only 320px wide, so the grid is
-   capped at 1040px: each tile then shows at about its real size (~330px)
-   instead of being stretched and blurred. */
+/* Four equal tiles in one row. The source photos are only 320px wide, so
+   the grid is capped at 1040px: each tile then shows at or below its real
+   size (~250px) instead of being stretched and blurred. */
 @media (min-width: 768px) {
   .bhf-visit__grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     max-width: 1040px;
   }
 }
